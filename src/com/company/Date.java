@@ -10,20 +10,21 @@ public class Date {
         this.month = month;
         this.day = day;
     }
-      public int addDays(int days, Day day, Month month){
+      public Date addDays(int days, Day day, Month month, Year year){
         int totalDays = day.getDay() + days;
+        int newMonth = month.getMonth() + 1;
         if (totalDays > 28 && month.getMonth() == 2 ){
-            return (totalDays - 28);
+            return new Date(getYear(),new Month(newMonth),new Day(totalDays - 28));
 
-        } else if (day.getDay() > 30 && (month.getMonth() == 4) || (month.getMonth() == 6) || (month.getMonth() == 9) ||
+        } else if (totalDays> 30 && (month.getMonth() == 4) || (month.getMonth() == 6) || (month.getMonth() == 9) ||
                 (month.getMonth() == 11) ){
-           return (day.getDay() - 30);
+            return new Date(getYear(),new Month(newMonth),new Day(totalDays - 30));
 
-        } else if (day.getDay() > 31 && (month.getMonth() == 1) || (month.getMonth() == 3) || (month.getMonth() == 5) ||
+        } else if (totalDays > 31 && (month.getMonth() == 1) || (month.getMonth() == 3) || (month.getMonth() == 5) ||
                 (month.getMonth() == 7) || (month.getMonth() == 8) || (month.getMonth() == 10) || (month.getMonth() == 12)){
-            return (day.getDay() - 31);
+            return new Date(getYear(),new Month(newMonth),new Day(totalDays - 31));
         } else
-        return (day.getDay() + days);
+            return new Date(getYear(),getMonth(),new Day(totalDays));
       }
       /*public int daysInMonth(int month) {
           int daysInMonth = 0;
